@@ -28,10 +28,25 @@ func Quicksort(array []int) {
 	}
 
 	left, right := 0, size-1
-	pivot := rand.Int() % size
+	middle := (left + right) / 2
 
-	swap(array, right, pivot)
+	// Average of three
+	if array[middle] < array[left] {
+		swap(array, middle, left)
+	}
 
+	if array[right] < array[left] {
+		swap(array, right, left)
+	}
+
+	if array[right] < array[middle] {
+		swap(array, middle, right)
+	}
+
+	pivot := right - 1
+	swap(array, middle, pivot)
+
+	// Partition
 	for i := 0; i < right; i++ {
 		if array[i] < array[right] {
 			swap(array, left, i)
